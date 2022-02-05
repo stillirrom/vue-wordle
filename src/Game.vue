@@ -113,7 +113,7 @@ function completeRow() {
       setTimeout(() => {
         grid = genResultGrid()
         showMessage(
-          ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'][
+          ['Genio', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'][
             currentRowIndex
           ],
           -1
@@ -179,13 +179,7 @@ function genResultGrid() {
     </div>
   </Transition>
   <header>
-    <h1>VVORDLE</h1>
-    <a
-      id="source-link"
-      href="https://github.com/yyx990803/vue-wordle"
-      target="_blank"
-      >Source</a
-    >
+    <h1>El Wordle de MILLOS</h1>
   </header>
   <div id="board">
     <div
@@ -216,6 +210,14 @@ function genResultGrid() {
     </div>
   </div>
   <Keyboard @key="onKey" :letter-states="letterStates" />
+  <div>
+    Usa solo palabras de 5 letras (incluyendo nombres)
+    <br/>en la historia de Millonarios
+    <br/><a
+    href="https://github.com/yyx990803/vue-wordle"
+    target="_blank"
+    >basado en vue-wordle</a>
+    </div>
 </template>
 
 <style scoped>
