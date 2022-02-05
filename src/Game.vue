@@ -174,7 +174,7 @@ function genResultGrid() {
 
 // copy button function
 function copy(){
-  navigator.clipboard.writeText(`${grid}\n\nIntenta resolverlo en:\nhttps://bit.ly/MillosWordle`).then(() => {
+  navigator.clipboard.writeText(`Mis resultados en el Worlde de Millos:\n\n${grid}\n\nIntenta resolverlo en:\nhttps://bit.ly/MillosWordle`).then(() => {
     alert("Copiado al portapapeles!");
   }).catch(err => {
     alert("Error: " + err);
