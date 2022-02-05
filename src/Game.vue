@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { onUnmounted } from 'vue'
-import { getWordOfTheDay, allWords } from './words'
+import { getDayNumber, getWordOfTheDay, allWords } from './words'
 import Keyboard from './Keyboard.vue'
 import { LetterState } from './types'
 
+// Get day number
+const dayNumber = getDayNumber()
 // Get word of the day
-const answer = getWordOfTheDay()
+const answer = getWordOfTheDay(dayNumber)
 
 // Board state. Each tile is represented as { letter, state }
 const board = $ref(
@@ -75,7 +77,7 @@ function completeRow() {
     const guess = currentRow.map((tile) => tile.letter).join('')
     if (!allWords.includes(guess) && guess !== answer) {
       shake()
-      showMessage(`Not in word list`)
+      showMessage(`La palabra no está en mi lista de palabras`)
       return
     }
 
@@ -113,7 +115,7 @@ function completeRow() {
       setTimeout(() => {
         grid = genResultGrid()
         showMessage(
-          ['Genio', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'][
+          ['Genio', 'Magnifico', 'Impresionante', 'Esplendido', 'Bien', 'Fiuuu'][
             currentRowIndex
           ],
           -1
@@ -134,7 +136,7 @@ function completeRow() {
     }
   } else {
     shake()
-    showMessage('Not enough letters')
+    showMessage('No hay suficientes letras')
   }
 }
 
@@ -169,6 +171,15 @@ function genResultGrid() {
     })
     .join('\n')
 }
+
+// copy button function
+function copy(){
+  navigator.clipboard.writeText(`${grid}\n\nhttps://bit.ly/MillosWordle`).then(() => {
+    alert("Copiado al portapapeles!");
+  }).catch(err => {
+    alert("Error: " + err);
+  });
+}
 </script>
 
 <template>
@@ -176,6 +187,7 @@ function genResultGrid() {
     <div class="message" v-if="message">
       {{ message }}
       <pre v-if="grid">{{ grid }}</pre>
+      <button v-if="grid" @click="copy">Copiar</button>
     </div>
   </Transition>
   <header>
@@ -217,6 +229,10 @@ function genResultGrid() {
     href="https://github.com/yyx990803/vue-wordle"
     target="_blank"
     >basado en vue-wordle</a>
+    <br/><a
+    href="https://twitter.com/stillirrom"
+    target="_blank"
+    >soporte y sugerencias en @Stillirrom</a>
     </div>
 </template>
 

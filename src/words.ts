@@ -1,19 +1,6 @@
-const defaultMessage = ' Using word of the day instead.'
+const defaultMessage = ' Usando la palabra del día.'
 
-export function getWordOfTheDay() {
-  if (location.search) {
-    try {
-      const query = atob(location.search.slice(1))
-      if (query.length !== 5) {
-        alert(`Incorrect word length from encoded query. ${defaultMessage}`)
-      } else {
-        return query
-      }
-    } catch (e) {
-      alert(`Malformed encoded word query. ${defaultMessage}`)
-    }
-  }
-
+export function getDayNumber(){
   const now = new Date()
   const start = new Date(2022, 0, 0)
   const diff = Number(now) - Number(start)
@@ -21,13 +8,28 @@ export function getWordOfTheDay() {
   while (day > answers.length) {
     day -= answers.length
   }
+  return day
+}
+
+export function getWordOfTheDay(day:number) {
   return answers[day]
 }
 
 // copied from Wordle source
 const answers = [
   'roman',
-  'millo'
+  'millo',
+  'perez',
+  'mayer',
+  'uribe'
+]
+
+const allowedGuesses = [
+  'mundo',
+  'lista',
+  'pilar',
+  'tacho',
+  'lloro'
 ]
 
 export const allWords = [...answers, ...allowedGuesses]
